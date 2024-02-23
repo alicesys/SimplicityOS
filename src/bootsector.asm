@@ -21,11 +21,13 @@ read_sectors:			; FloppyDisk
 	jmp 0x0000:0x7e00
 
 read_error:
-	mov ah, 0x0e
-	mov al, 'X'
-	int 0x10
+	mov si, error_msg
+	call prints
 	cli
 	hlt
 
+%include "src/include/prints.asm"
+
+error_msg db '[ERROR] Disk Read Failed!', 0
 times 510-($-$$) db 0
 dw 0xaa55
