@@ -8,6 +8,10 @@ k_main:
 	mov ss, ax
 	mov sp, 0x7e00
 
+	mov ah, 0x00		; Re-set 80x25 VideoMode
+	mov al, 0x03
+	int 0x10
+
 	mov si, msg
 	call prints
 

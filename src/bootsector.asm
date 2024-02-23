@@ -7,9 +7,14 @@ main:
 	mov ss, ax
 	mov sp, 0x7c00
 
+	mov ah, 0x00		; Set 80x25 VideoMode
+	mov al, 0x03
+	int 0x10
+
 read_sectors:			; FloppyDisk
-	mov es, ax		; 0x0000:0x7e00 (ES:BX)
-	mov bx, 0x7e00
+	xor ax, ax		; Re-set ax to 0x0000
+	mov es, ax		; ES = 0x0000 (ES:BX)
+	mov bx, 0x7e00		; BX = 0x7e00 (ES:BX)
 	mov ah, 0x02
 	mov al, 1
 	mov ch, 0
