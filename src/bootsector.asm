@@ -4,7 +4,7 @@ bits 16
 %define endl 0x0d, 0x0a
 
 main:
-	xor ax, ax		; 0x0000
+	xor ax, ax			; 0x0000
 	mov ds, ax
 	mov ss, ax
 	mov sp, 0x7c00
@@ -14,8 +14,8 @@ main:
 	int 0x10
 
 read_sectors:			; FloppyDisk
-	xor ax, ax		; Re-set ax to 0x0000
-	mov es, ax		; ES = 0x0000 (ES:BX)
+	xor ax, ax			; Re-set ax to 0x0000
+	mov es, ax			; ES = 0x0000 (ES:BX)
 	mov bx, 0x7e00		; BX = 0x7e00 (ES:BX)
 	mov ah, 0x02
 	mov al, 1

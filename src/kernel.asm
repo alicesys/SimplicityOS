@@ -21,4 +21,4 @@ k_main:
 %include "src/include/prints.asm"
 
 k_data:
-	msg db 'Hello from the Simplicity Kernel!', 0
+	msg db 'Hello from the Simplicity Kernel! ', 0x02, 0
