@@ -6,6 +6,7 @@ bits 16
 k_main:
 	xor ax, ax
 	mov ds, ax
+	cld				; ClearDirectionFlag for lodsb
 	mov es, ax
 	mov ss, ax
 	mov sp, 0x7e00
@@ -15,17 +16,19 @@ k_main:
 	int 0x10
 
 	mov si, msg
-	call prints
+	mov bl, 0x02
+	call printc
 
 	mov si, prompt
-	call prints
+	mov bl, 0x02
+	call printc
 
 %include "src/include/keyboard.asm"
-%include "src/include/prints.asm"
+%include "src/include/printc.asm"
 
 	cli
 	hlt
 
 k_data:
-	msg db 'Hello from the Simplicity Kernel! ', 0x02, endl, 0
+	msg db 'Hello from the Simplicity Kernel! :)', endl, 0
 	prompt db '>', 0
