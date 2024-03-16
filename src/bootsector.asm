@@ -31,13 +31,7 @@ pre_boot:
 	mov si, preboot_msg
 	mov bl, 0x02
 	call printc
-
-	mov cx, 1     		; Handle next character color
-        mov bh, 0
-	lodsb
-	mov ah, 0x09
-	mov al, ' '
-	int 0x10
+	call handle_color
 
 .pre_boot_jumpk:
 	mov ah, 0x00		; Wait for KeyPress, then jump to kernel
@@ -53,21 +47,16 @@ read_error:
      	mov bx, 0x04
      	int 0x10
 
-	mov si, error_msg
+	mov si, error_msg	; PrintColor the error msg
 	mov bl, 0x4F
 	call printc
+	call handle_color
 
-	mov cx, 1     		; Handle next character color
-	mov bh, 0
-	lodsb
-	mov ah, 0x09
-	mov al, ' '
-	int 0x10
-
-	cli
+	cli			; Halt and Catch Fire
 	hlt
 
 %include "src/include/printc.asm"
+%include "src/include/handle_color.asm"
 
 error_msg db '[ERROR] Disk Read Failed! :(', 0
 preboot_msg db 'This is Simplicity Pre-boot!', endl,'Press any key to enter in kernel ->', 0
