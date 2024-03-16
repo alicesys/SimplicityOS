@@ -6,7 +6,7 @@ bits 16
 k_main:
 	xor ax, ax
 	mov ds, ax
-	cld				; ClearDirectionFlag for lodsb
+	cld			; ClearDirectionFlag for lodsb
 	mov es, ax
 	mov ss, ax
 	mov sp, 0x7e00

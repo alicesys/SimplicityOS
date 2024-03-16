@@ -1,7 +1,7 @@
 ; Experimental Keyboard Support
 keyboard_handle_color:
-	mov cx, 1     
-     mov bh, 0 
+	mov cx, 1
+        mov bh, 0
 	lodsb
 	mov ah, 0x09
 	mov al, ' '

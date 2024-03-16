@@ -6,7 +6,7 @@ bits 16
 main:
 	xor ax, ax		; 0x0000
 	mov ds, ax
-	cld				; ClearDirectionFlag for lodsb
+	cld			; ClearDirectionFlag for lodsb
 	mov ss, ax
 	mov sp, 0x7c00
 
@@ -33,7 +33,7 @@ pre_boot:
 	call printc
 
 	mov cx, 1     		; Handle next character color
-     mov bh, 0 
+        mov bh, 0
 	lodsb
 	mov ah, 0x09
 	mov al, ' '
@@ -45,26 +45,26 @@ pre_boot:
 	jmp 0x0000:0x7e00
 
 read_error:
-     mov ah, 0x00		; Re-Set 80x25 VideoMode
+     	mov ah, 0x00		; Re-Set 80x25 VideoMode
 	mov al, 0x03
 	int 0x10
 
-     mov ah, 0x0b		; Set Red ColorPalette
-     mov bx, 0x04
-     int 0x10
+    	mov ah, 0x0b		; Set Red ColorPalette
+     	mov bx, 0x04
+     	int 0x10
 
 	mov si, error_msg
 	mov bl, 0x4F
 	call printc
 
 	mov cx, 1     		; Handle next character color
-     mov bh, 0 
+	mov bh, 0
 	lodsb
 	mov ah, 0x09
 	mov al, ' '
 	int 0x10
 
-	cli	
+	cli
 	hlt
 
 %include "src/include/printc.asm"
